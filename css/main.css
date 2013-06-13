@@ -60,19 +60,27 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+#container {
+    margin: 10px auto;
+    width: 80%;
+}
 
+button {
+    display: block;
+    width: 100%;
+}
 
+p {
+    width: 100%;
+    margin: 10px 0;
+}
 
-
-
-
-
-
-
-
-
-
-
+textarea {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    height: 90px;
+    width: 100%;
+}
 
 /* ==========================================================================
    Media Queries

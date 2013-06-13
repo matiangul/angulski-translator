@@ -16,12 +16,54 @@
         <![endif]-->
     </head>
     <body>
+        <?php
+            require 'cgi/FrenglyService.php';
+            //strings
+            $pl_de = 'Polski -> Niemiecki';
+            $de_pl = 'Niemiecki -> Polski';
+            $translate = 'Tłumacz';
+            $exception = 'Twój tłumacz nie ma teraz czasu';
+            //process request
+            $defaultLanguage = 'pl_de';
+            $defaultTranslation = '...';
+            $defaultText = '';
+            $language = (isset($_POST['language-dir']) == true) ? $_POST['language-dir'] : $defaultLanguage;
+            $text = (isset($_POST['text']) == true) ? $_POST['text'] : $defaultText;
+            $translation = $defaultTranslation;
+            if (isset($_POST['language-dir']) && isset($_POST['text'])) {
+                $languages = explode('_', $language);
+                $src = $languages[0];
+                $dest = $languages[1];
+                $done = 0;
+                while($done < 3) {
+                    try {
+                        $translation = FrenglyService::translate($text, $src, $dest);
+                    } catch (\Exception $e) {
+                        $translation = $exception;
+                        //try again after 3,5 sec
+                        usleep(3005000);
+                        $done++;
+                        continue;
+                    }
+                    $done = 3;
+                }
+            }
+            if ($translation === '') {
+                $translation = $defaultTranslation;
+            }
+        ?>
+        <div id="container">
+            <button id="language-pl_de" <?php echo $language === 'pl_de' ? '' : 'style="display:none;"' ?> value="pl_de"><?php echo $pl_de ?></button>
+            <button id="language-de_pl" <?php echo $language === 'de_pl' ? '' : 'style="display:none;"' ?> value="de_pl"><?php echo $de_pl ?></button>
+            <form method="post" action="http://<?php echo $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] ?>">
+                <input type="hidden" id="language-dir" name="language-dir" value="<?php echo $language ?>"/>
+                <textarea name="text"><?php echo $text ?></textarea>
+                <p id="translation"><?php echo $translation ?></p>
+                <button name="translate" id="translate" value="translate"><?php echo $translate ?></button>
+            </form>
+        </div>
 
-        <p>Hello world! This is HTML5 Boilerplate.</p>
-        <p>PHP server says that http_get function is <?php echo function_exists("http_get") == true ? 'available' : 'not available'; ?></p>
-        <p>PHP server says that simplexml_load_string function is <?php echo function_exists("simplexml_load_string") == true ? 'available' : 'not available'; ?></p>
-        <p>PHP server says that curl_exec function is <?php echo function_exists("curl_exec") == true ? 'available' : 'not available'; ?></p>
-
+        <script src="js/vendor/ready.min.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

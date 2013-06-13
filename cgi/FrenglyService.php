@@ -31,7 +31,7 @@ class FrenglyService {
             return '';
         }
         $what = urlencode($what);
-        $response = file_get_contents("http://syslang.com/?src=$from&dest=$to&text=$what&email=angua1990@gmail.com&password=angulskitranslator&outformat=json");
+        $response = file_get_contents("http://syslang.com/?src=$from&dest=$to&text=$what&email=".self::$configuration['login']."&password=".self::$configuration['password']."&outformat=json");
         $resObj = json_decode($response);
         if (!($resObj instanceof stdClass)) {
             $xmlObj = simplexml_load_string($response);
