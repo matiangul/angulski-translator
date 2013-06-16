@@ -59,6 +59,9 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+body {
+    font-size: 2em;
+}
 
 #container {
     margin: 10px auto;
@@ -78,8 +81,43 @@ p {
 textarea {
     margin-top: 10px;
     margin-bottom: 0px;
-    height: 90px;
     width: 100%;
+}
+
+button, textarea, p, span {
+	font-size: 1em;
+}
+
+.helper {
+	color: grey;
+}
+
+#translationFreengly, #translationGoogle {
+	font-size: 1.8em;
+}
+
+#keyboardPL button {
+		font-size: 0.8em;
+    margin-top: 10px;
+    display: inline;
+		width: auto;
+}
+
+#keyboardDE button {
+		font-size: 0.8em;
+    margin-top: 10px;
+    display: inline;
+		width: auto;
+}
+
+.column {
+	float: left;
+	min-width: 50%;
+	text-align: left;
+}
+
+.small {
+	font-size: 0.4em;
 }
 
 /* ==========================================================================
