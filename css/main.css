@@ -78,7 +78,7 @@ p {
     margin: 10px 0;
 }
 
-textarea {
+#text {
     margin-top: 10px;
     margin-bottom: 0px;
     width: 100%;
@@ -86,14 +86,29 @@ textarea {
 
 button, textarea, p, span {
 	font-size: 1em;
+	color: rgb(70,70,70);
 }
 
 .helper {
-	color: grey;
+	color: rgb(70,70,70);
+}
+
+#text {
+	background-color: rgb(233, 233, 233);
+	min-height: 1.4em;
+	color: black;
+	word-break: break-all;
+}
+
+.placeholder {
+	color: rgb(70,70,70);
 }
 
 #translationFreengly, #translationGoogle {
+	background-color: rgb(233, 233, 233);
+	min-height: 1.8em;
 	font-size: 1.8em;
+	color: black;
 }
 
 #keyboardPL button {
